@@ -40,11 +40,41 @@ public class Pokemon
         return (Mathf.FloorToInt(2 * stat * lv / 100.0f + offset));
     }
 
-    public bool TakeDamage(Move move, Pokemon attacker)
+    public DamageInfo TakeDamage(Move move, Pokemon attacker)
     {
-        float modifiers = Random.Range(0.85f, 1.0f);
+        float atk = 1.0f;
+        float def = 1.0f;
+        if(move.Base.AtkType == AttackType.Physical)
+        {
+            atk = attacker.Attack;
+            def = Defence;
+        }
+        else if(move.Base.AtkType == AttackType.Special)
+        {
+            atk = attacker.SpAtk;
+            def = SpDef;
+        }
+
+        float crit = 1.0f;
+        if (Random.value * 100.0f <= 4.167f)
+        {
+            crit = 2.0f;
+        }
+
+        float type = TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) * TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type2);
+
+        var dmgInfo = new DamageInfo()
+        {
+            Critical = crit,
+            TypeEffectiveness = type,
+            Faint = false
+        };
+
+        float modifiers = Random.Range(0.85f, 1.0f) * type * crit;
         float a = (attacker.level * 0.4f + 2);
-        float d = (a * move.Base.Power * ((float)attacker.Attack / Defence) * 0.02f) + 2;
+        float d = (a * move.Base.Power * (atk / def) * 0.02f) + 2;
+        if (move.Base.Power == 0)
+            d = 0.0f;
         int dmg = Mathf.FloorToInt(d * modifiers);
 
         hp -= dmg;
@@ -52,15 +82,22 @@ public class Pokemon
         if (hp <= 0)
         {
             hp = 0;
-            return true;
+            dmgInfo.Faint = true;
         }
-        else
-            return false;
+
+        return dmgInfo;
     }
 
     public Move GetRandomMove()
     {
         int r = Random.Range(0, Moves.Count);
         return Moves[r];
+    }
+
+    public class DamageInfo
+    {
+        public bool Faint { get; set; }
+        public float Critical { get; set; }
+        public float TypeEffectiveness { get; set; }
     }
 }

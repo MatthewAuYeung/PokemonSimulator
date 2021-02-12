@@ -21,6 +21,8 @@ public class MoveBase : ScriptableObject
     private int accuracy;
     [SerializeField]
     private int pp;
+    [SerializeField]
+    AttackType attackType;
 
     public string Name { get { return name; } }
     public string Description { get { return description; } }
@@ -28,4 +30,12 @@ public class MoveBase : ScriptableObject
     public int Power { get { return power; } }
     public int Accuracy { get { return accuracy; } }
     public int PP { get { return pp; } }
+    public AttackType AtkType { get { return attackType; } }
+}
+
+public enum AttackType
+{
+    None,
+    Physical,
+    Special
 }
