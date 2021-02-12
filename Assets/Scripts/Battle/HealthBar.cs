@@ -14,8 +14,6 @@ public class HealthBar : MonoBehaviour
     private Color greenHealth;
 
     private float healthvalue;
-    [Range(0.0f, 1.0f)]
-    public float testhp = 1.0f;
 
     private void Start()
     {
@@ -25,8 +23,6 @@ public class HealthBar : MonoBehaviour
     private void Update()
     {
         healthvalue = health.transform.localScale.x;
-
-        //SetHP(testhp);
 
         if(healthvalue > 0.5f)
         {
@@ -45,5 +41,19 @@ public class HealthBar : MonoBehaviour
     public void SetHP(float hpNormalized)
     {
         health.transform.localScale = new Vector3(hpNormalized, 1.0f);
+    }
+
+    public IEnumerator SetHpSmooth(float hp)
+    {
+        float currentHp = health.transform.localScale.x;
+        float diff = currentHp - hp;
+
+        while(currentHp - hp > Mathf.Epsilon)
+        {
+            currentHp -= diff * Time.deltaTime;
+            health.transform.localScale = new Vector3(currentHp, 1.0f);
+            yield return null;
+        }
+        health.transform.localScale = new Vector3(hp, 1.0f);
     }
 }

@@ -1531,7 +1531,6 @@ MonoBehaviour:
   health: {fileID: 426246538}
   yellowHealth: {r: 0.9622642, g: 0.730555, b: 0.09531862, a: 1}
   redHealth: {r: 0.754717, g: 0, b: 0, a: 1}
-  testhp: 1
 --- !u!1 &1265186646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 11400000, guid: dc646e4dd7799644483acf508fdbd395, type: 2}
-  level: 50
+  level: 10
   isPlayerUnit: 1
 --- !u!1 &1437772130
 GameObject:
@@ -2297,7 +2296,6 @@ MonoBehaviour:
   health: {fileID: 1994839182}
   yellowHealth: {r: 0.9622642, g: 0.730555, b: 0.09531862, a: 1}
   redHealth: {r: 0.754717, g: 0, b: 0, a: 1}
-  testhp: 1
 --- !u!224 &1833786685
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2834,5 +2832,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 11400000, guid: 1e3e08e3ba84a8c41943f426102eeee9, type: 2}
-  level: 50
+  level: 10
   isPlayerUnit: 0

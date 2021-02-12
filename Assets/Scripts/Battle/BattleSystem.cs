@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy }
+public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Battle }
 public enum PlayerActionState { Fight, Run }
 
 public class BattleSystem : MonoBehaviour
@@ -55,7 +56,48 @@ public class BattleSystem : MonoBehaviour
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
+    }
 
+    private IEnumerator PerformPlayerMove()
+    {
+        battleState = BattleState.Battle;
+        var move = playerUnit.Pokemon.Moves[currentMoveIndex];
+        yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}.");
+
+        yield return new WaitForSeconds(1.0f);
+
+        bool isFainted = enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
+        yield return enemyHud.UpdateHp();
+
+        if (isFainted)
+        {
+            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} fainted.");
+        }
+        else
+        {
+            StartCoroutine(PerformEnemyMove());
+        }
+    }
+
+    private IEnumerator PerformEnemyMove()
+    {
+        battleState = BattleState.EnemyMove;
+
+        var move = enemyUnit.Pokemon.GetRandomMove();
+        yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} used {move.Base.Name}.");
+
+        yield return new WaitForSeconds(1.0f);
+
+        var isFainted = playerUnit.Pokemon.TakeDamage(move, enemyUnit.Pokemon);
+        yield return playerHud.UpdateHp();
+        if (isFainted)
+        {
+            yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} fainted.");
+        }
+        else
+        {
+            PlayerAction();
+        }
     }
 
     private void Update()
@@ -72,7 +114,7 @@ public class BattleSystem : MonoBehaviour
                 break;
             case BattleState.EnemyMove:
                 break;
-            case BattleState.Busy:
+            case BattleState.Battle:
                 break;
             default:
                 break;
@@ -132,5 +174,12 @@ public class BattleSystem : MonoBehaviour
         }
 
         dialogBox.UpdateMoveSelection(currentMoveIndex, playerUnit.Pokemon.Moves[currentMoveIndex]);
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            dialogBox.EnableMoveSelector(false);
+            dialogBox.EnableDialogText(true);
+            StartCoroutine(PerformPlayerMove());
+        }
     }
 }
