@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0367b3563cfc8024c98a9402b344219c, type: 3}
+  m_Name: Jirachi
+  m_EditorClassIdentifier: 
+  name: Jirachi
+  description: 
+  frontSprite: {fileID: 21300000, guid: 20498975dc91e1f4eb41a9073dcacec2, type: 3}
+  backSprite: {fileID: 21300000, guid: 7b87d72740fdaf648bc72e873bd6e977, type: 3}
+  type1: 10
+  type2: 14
+  maxHp: 100
+  attack: 100
+  defense: 100
+  spAtk: 100
+  spDef: 100
+  speed: 100
+  learnableMoves: []
