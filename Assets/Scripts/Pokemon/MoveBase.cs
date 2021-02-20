@@ -37,5 +37,6 @@ public enum AttackType
 {
     None,
     Physical,
-    Special
+    Special,
+    StatChange
 }
