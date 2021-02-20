@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d67cf46ddf4292c46a547bd14371b574, type: 3}
-  m_Name: Earth Power
+  m_Name: Thunderbolt
   m_EditorClassIdentifier: 
-  name: Earth Power
+  name: Thunderbolt
   description: 
-  type: 6
+  type: 5
   power: 90
   accuracy: 100
-  pp: 10
+  pp: 15
   attackType: 2

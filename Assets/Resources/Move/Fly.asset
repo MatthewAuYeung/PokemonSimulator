@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d67cf46ddf4292c46a547bd14371b574, type: 3}
-  m_Name: Move
+  m_Name: Fly
   m_EditorClassIdentifier: 
-  name: 
+  name: Fly
   description: 
-  type: 0
-  power: 0
-  accuracy: 0
-  pp: 0
-  attackType: 0
+  type: 13
+  power: 90
+  accuracy: 95
+  pp: 15
+  attackType: 1

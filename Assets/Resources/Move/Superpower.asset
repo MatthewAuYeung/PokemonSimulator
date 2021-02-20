@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67cf46ddf4292c46a547bd14371b574, type: 3}
   m_Name: Superpower
   m_EditorClassIdentifier: 
-  name: 
+  name: Superpower
   description: 
-  type: 0
-  power: 0
-  accuracy: 0
-  pp: 0
-  attackType: 0
+  type: 8
+  power: 120
+  accuracy: 100
+  pp: 5
+  attackType: 1

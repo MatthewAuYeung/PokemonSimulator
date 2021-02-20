@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67cf46ddf4292c46a547bd14371b574, type: 3}
   m_Name: Ice Beam
   m_EditorClassIdentifier: 
-  name: 
+  name: Ice Beam
   description: 
-  type: 0
-  power: 0
-  accuracy: 0
-  pp: 0
-  attackType: 0
+  type: 9
+  power: 90
+  accuracy: 100
+  pp: 10
+  attackType: 2

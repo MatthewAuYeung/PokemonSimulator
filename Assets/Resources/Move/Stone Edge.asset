@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67cf46ddf4292c46a547bd14371b574, type: 3}
   m_Name: Stone Edge
   m_EditorClassIdentifier: 
-  name: 
+  name: Stone Edge
   description: 
-  type: 0
-  power: 0
-  accuracy: 0
-  pp: 0
-  attackType: 0
+  type: 7
+  power: 100
+  accuracy: 80
+  pp: 5
+  attackType: 1
