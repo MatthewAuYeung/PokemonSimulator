@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Battle }
 public enum PlayerActionState { Fight, Run }
@@ -13,7 +14,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField]
     private BattleHud playerHud;
     [SerializeField]
-    private BattleUnit enemyUnit;
+    private EnemyTrainer enemy;
+    //[SerializeField]
+    //private BattleUnit enemyUnit;
     [SerializeField]
     private BattleHud enemyHud;
     [SerializeField]
@@ -31,13 +34,13 @@ public class BattleSystem : MonoBehaviour
     public IEnumerator SetupBattle()
     {
         playerUnit.Setup();
-        enemyUnit.Setup();
+        enemy.enemyUnit.Setup();
         playerHud.SetData(playerUnit.Pokemon);
-        enemyHud.SetData(enemyUnit.Pokemon);
+        enemyHud.SetData(enemy.enemyUnit.Pokemon);
 
         dialogBox.SetMoveNames(playerUnit.Pokemon.Moves);
 
-        yield return dialogBox.TypeDialog($"??? sents out {enemyUnit.Pokemon.Base.Name}.");
+        yield return dialogBox.TypeDialog($"??? sents out {enemy.enemyUnit.Pokemon.Base.Name}.");
         PlayerAction();
     }
 
@@ -63,14 +66,20 @@ public class BattleSystem : MonoBehaviour
         var move = playerUnit.Pokemon.Moves[currentMoveIndex];
         yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} used {move.Base.Name}.");
 
-        var dmgInfo = enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
+        playerUnit.AttackAnimation();
+        yield return new WaitForSeconds(1.0f);
+
+        enemy.enemyUnit.HitAnimation();
+
+        var dmgInfo = enemy.enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
         yield return enemyHud.UpdateHp();
 
                 yield return ShowDamageInfo(dmgInfo);
 
         if (dmgInfo.Faint)
         {
-            yield return dialogBox.TypeDialog($"{enemyUnit.Pokemon.Base.Name} fainted.");
+            yield return dialogBox.TypeDialog($"{enemy.enemyUnit.Pokemon.Base.Name} fainted.");
+            enemy.enemyUnit.FaintAnimation();
         }
         else
         {
@@ -82,10 +91,16 @@ public class BattleSystem : MonoBehaviour
     {
         battleState = BattleState.EnemyMove;
 
-        var move = enemyUnit.Pokemon.GetRandomMove();
-        yield return dialogBox.TypeDialog($"The opposing {enemyUnit.Pokemon.Base.Name} used {move.Base.Name}!");
+        //var move = enemy.enemyUnit.Pokemon.GetRandomMove();
+        var move = enemy.EnemyAtk(playerUnit.Pokemon);
+        yield return dialogBox.TypeDialog($"The opposing {enemy.enemyUnit.Pokemon.Base.Name} used {move.Base.Name}!");
 
-        var dmgInfo = playerUnit.Pokemon.TakeDamage(move, enemyUnit.Pokemon);
+        enemy.enemyUnit.AttackAnimation();
+        yield return new WaitForSeconds(1.0f);
+
+        playerUnit.HitAnimation();
+
+        var dmgInfo = playerUnit.Pokemon.TakeDamage(move, enemy.enemyUnit.Pokemon);
         yield return playerHud.UpdateHp();
 
         yield return ShowDamageInfo(dmgInfo);
@@ -93,6 +108,7 @@ public class BattleSystem : MonoBehaviour
         if (dmgInfo.Faint)
         {
             yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} fainted.");
+            playerUnit.FaintAnimation();
         }
         else
         {
@@ -154,6 +170,7 @@ public class BattleSystem : MonoBehaviour
                     PlayerMove();
                     break;
                 case PlayerActionState.Run:
+                    SceneManager.LoadScene("Menu");
                     break;
                 default:
                     break;

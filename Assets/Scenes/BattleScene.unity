@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: {fileID: 1378897593}
   playerHud: {fileID: 650673059}
-  enemyUnit: {fileID: 2078137783}
+  enemy: {fileID: 1890459286}
   enemyHud: {fileID: 1784456877}
   dialogBox: {fileID: 1599440414}
 --- !u!1 &420764751
@@ -1696,8 +1696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e9e3f0bbe4eb847babd7d6f1fc5589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: dc646e4dd7799644483acf508fdbd395, type: 2}
-  level: 10
+  _base: {fileID: 11400000, guid: 9e903d0f9eeaaad4586bc9e4248c04cd, type: 2}
+  level: 50
   isPlayerUnit: 1
 --- !u!1 &1437772130
 GameObject:
@@ -2437,6 +2437,50 @@ Transform:
   m_Father: {fileID: 282640879}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1890459285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1890459287}
+  - component: {fileID: 1890459286}
+  m_Layer: 0
+  m_Name: EnemyTrainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1890459286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890459285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dd08519639c53408e2c272f1fd2ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyUnit: {fileID: 2078137783}
+--- !u!4 &1890459287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890459285}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.035829216, y: 0.04061943, z: 228.27812}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1960285630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,6 +2875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e9e3f0bbe4eb847babd7d6f1fc5589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 1e3e08e3ba84a8c41943f426102eeee9, type: 2}
-  level: 10
+  _base: {fileID: 11400000, guid: 67cb240ce59f522409c61b52450b72fc, type: 2}
+  level: 50
   isPlayerUnit: 0
