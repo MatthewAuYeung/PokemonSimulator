@@ -18,11 +18,15 @@ public class MainMenu : DialogText
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentActionIndex < 1)
                 ++currentActionIndex;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentActionIndex > 0)
                 --currentActionIndex;
         }
@@ -31,9 +35,13 @@ public class MainMenu : DialogText
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+            AudioManager.instance.PlaySound("Button");
+
             switch ((MenuSelection)currentActionIndex)
             {
                 case MenuSelection.Start:
+                    AudioManager.instance.StopSound("MainTheme");
+                    AudioManager.instance.PlaySound("BattleTheme");
                     SceneManager.LoadScene("BattleScene");
                     break;
                 case MenuSelection.Exit:

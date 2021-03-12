@@ -1696,7 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e9e3f0bbe4eb847babd7d6f1fc5589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 9e903d0f9eeaaad4586bc9e4248c04cd, type: 2}
+  _base: {fileID: 11400000, guid: f57dd982e6aa05f41bd8ef80bfd3f2a4, type: 2}
   level: 50
   isPlayerUnit: 1
 --- !u!1 &1437772130
@@ -1998,15 +1998,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8052a7510d083564a97304d691358382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionTexts:
+  - {fileID: 1265186648}
+  - {fileID: 158439080}
   charPerSec: 30
   dialogText: {fileID: 48576305}
   highlight: {r: 0.2028302, g: 0.3981842, b: 1, a: 1}
   actionSelector: {fileID: 140204874}
   moveSelector: {fileID: 1571508104}
   moveInfo: {fileID: 1071666416}
-  actionTexts:
-  - {fileID: 1265186648}
-  - {fileID: 158439080}
   moveTexts:
   - {fileID: 1714182801}
   - {fileID: 253337007}

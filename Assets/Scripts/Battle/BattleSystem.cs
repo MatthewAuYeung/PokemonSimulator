@@ -80,6 +80,8 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog($"{enemy.enemyUnit.Pokemon.Base.Name} fainted.");
             enemy.enemyUnit.FaintAnimation();
+            AudioManager.instance.StopSound("BattleTheme");
+            AudioManager.instance.PlaySound("Win");
         }
         else
         {
@@ -152,11 +154,15 @@ public class BattleSystem : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentActionIndex < 1)
                 ++currentActionIndex;
         }
         else if(Input.GetKeyDown(KeyCode.UpArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentActionIndex > 0)
                 --currentActionIndex;
         }
@@ -164,12 +170,16 @@ public class BattleSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
+            AudioManager.instance.PlaySound("Button");
+
             switch ((PlayerActionState)currentActionIndex)
             {
                 case PlayerActionState.Fight:
                     PlayerMove();
                     break;
                 case PlayerActionState.Run:
+                    AudioManager.instance.StopSound("BattleTheme");
+                    AudioManager.instance.PlaySound("MainTheme");
                     SceneManager.LoadScene("Menu");
                     break;
                 default:
@@ -182,21 +192,29 @@ public class BattleSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentMoveIndex < playerUnit.Pokemon.Moves.Count - 1)
                 ++currentMoveIndex;
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentMoveIndex > 0)
                 --currentMoveIndex;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentMoveIndex < playerUnit.Pokemon.Moves.Count - 2)
                 currentMoveIndex += 2;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            AudioManager.instance.PlaySound("Button");
+
             if (currentMoveIndex > 1)
                 currentMoveIndex -= 2;
         }
@@ -205,6 +223,8 @@ public class BattleSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
+            AudioManager.instance.PlaySound("Button");
+
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
             StartCoroutine(PerformPlayerMove());

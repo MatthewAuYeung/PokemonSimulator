@@ -42,6 +42,8 @@ public class Pokemon
 
     public DamageInfo TakeDamage(Move move, Pokemon attacker)
     {
+        AudioManager.instance.PlaySound("Hit");
+
         float atk = 1.0f;
         float def = 1.0f;
         if(move.Base.AtkType == AttackType.Physical)
