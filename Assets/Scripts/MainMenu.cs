@@ -40,9 +40,9 @@ public class MainMenu : DialogText
             switch ((MenuSelection)currentActionIndex)
             {
                 case MenuSelection.Start:
-                    AudioManager.instance.StopSound("MainTheme");
-                    AudioManager.instance.PlaySound("BattleTheme");
-                    SceneManager.LoadScene("BattleScene");
+                    //AudioManager.instance.StopSound("MainTheme");
+                    //AudioManager.instance.PlaySound("BattleTheme");
+                    SceneManager.LoadScene("Selections");
                     break;
                 case MenuSelection.Exit:
                     Application.Quit();

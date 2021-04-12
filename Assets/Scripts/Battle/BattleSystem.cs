@@ -33,8 +33,8 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator SetupBattle()
     {
-        playerUnit.Setup();
-        enemy.enemyUnit.Setup();
+        playerUnit.Setup(Player.instance.pokemonBase);
+        enemy.enemyUnit.Setup(Enemy.instance.pokemonBase);
         playerHud.SetData(playerUnit.Pokemon);
         enemyHud.SetData(enemy.enemyUnit.Pokemon);
 

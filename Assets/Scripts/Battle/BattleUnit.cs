@@ -34,6 +34,17 @@ public class BattleUnit : MonoBehaviour
         EnterAnimation();
     }
 
+    public void Setup(PokemonBase selection)
+    {
+        Pokemon = new Pokemon(selection, level);
+        if (isPlayerUnit)
+            image.sprite = Pokemon.Base.BackSprite;
+        else
+            image.sprite = Pokemon.Base.FrontSprite;
+
+        EnterAnimation();
+    }
+
     public void EnterAnimation()
     {
         if (isPlayerUnit)
