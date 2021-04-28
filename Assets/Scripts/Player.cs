@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public PokemonBase pokemonBase;
+    public bool win = false;
 
     private void Awake()
     {

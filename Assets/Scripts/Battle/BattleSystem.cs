@@ -80,8 +80,11 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog($"{enemy.enemyUnit.Pokemon.Base.Name} fainted.");
             enemy.enemyUnit.FaintAnimation();
+            Player.instance.win = true;
             AudioManager.instance.StopSound("BattleTheme");
             AudioManager.instance.PlaySound("Win");
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene("EndScene");
         }
         else
         {
@@ -111,6 +114,11 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog($"{playerUnit.Pokemon.Base.Name} fainted.");
             playerUnit.FaintAnimation();
+            Player.instance.win = false;
+            AudioManager.instance.StopSound("BattleTheme");
+            AudioManager.instance.PlaySound("MainTheme");
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene("EndScene");
         }
         else
         {

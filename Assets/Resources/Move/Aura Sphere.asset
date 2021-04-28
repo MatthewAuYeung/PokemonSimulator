@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Aura Sphere
   description: 
-  type: 0
+  type: 8
   power: 80
   accuracy: 100
   pp: 20
