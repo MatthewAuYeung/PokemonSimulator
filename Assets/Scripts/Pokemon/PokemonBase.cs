@@ -95,6 +95,9 @@ public class TypeChart
 {
     static float[][] chart =
     {
+        // |    -> def
+        // v
+        // atk
         //                    NOR   FIR   WAT   GRA   ELE   GRO   ROC   FIG   ICE   STE   POI   BUG   FLY   PSY   DAR   GHO   DRA   FAI
         /*NOR*/ new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.5f, 1.0f, 1.0f, 0.5f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f },
         /*FIR*/ new float[] { 1.0f, 0.5f, 0.5f, 2.0f, 1.0f, 1.0f, 0.5f, 1.0f, 2.0f, 2.0f, 1.0f, 2.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.5f, 1.0f },

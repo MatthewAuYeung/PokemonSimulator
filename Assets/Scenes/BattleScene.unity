@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e9e3f0bbe4eb847babd7d6f1fc5589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: f57dd982e6aa05f41bd8ef80bfd3f2a4, type: 2}
+  _base: {fileID: 11400000, guid: b6ad364b418e5ef43aa95dd5aa382177, type: 2}
   level: 50
   isPlayerUnit: 1
 --- !u!1 &1437772130
@@ -3082,6 +3082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e9e3f0bbe4eb847babd7d6f1fc5589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 67cb240ce59f522409c61b52450b72fc, type: 2}
+  _base: {fileID: 11400000, guid: 5fb90eadc87e9354e94ea8ba4f91bfcd, type: 2}
   level: 50
   isPlayerUnit: 0
