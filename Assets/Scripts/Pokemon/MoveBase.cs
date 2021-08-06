@@ -23,6 +23,10 @@ public class MoveBase : ScriptableObject
     private int pp;
     [SerializeField]
     AttackType attackType;
+    [SerializeField]
+    bool recoil = false;
+    [SerializeField]
+    private int denominator;
 
     public string Name { get { return name; } }
     public string Description { get { return description; } }
@@ -31,6 +35,8 @@ public class MoveBase : ScriptableObject
     public int Accuracy { get { return accuracy; } }
     public int PP { get { return pp; } }
     public AttackType AtkType { get { return attackType; } }
+    public bool Recoil { get { return recoil; } }
+    public int Denominator { get { return denominator; } }
 }
 
 public enum AttackType

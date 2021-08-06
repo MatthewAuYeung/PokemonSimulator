@@ -81,6 +81,15 @@ public class Pokemon
 
         hp -= dmg;
 
+        if(move.Base.Recoil)
+        {
+            dmgInfo.RecoilDmg = Mathf.FloorToInt(dmg * (1.0f / move.Base.Denominator));
+        }
+        else
+        {
+            dmgInfo.RecoilDmg = 0;
+        }
+
         if (hp <= 0)
         {
             hp = 0;
@@ -101,5 +110,6 @@ public class Pokemon
         public bool Faint { get; set; }
         public float Critical { get; set; }
         public float TypeEffectiveness { get; set; }
+        public int RecoilDmg { get; set; }
     }
 }

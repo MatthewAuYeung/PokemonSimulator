@@ -19,3 +19,5 @@ MonoBehaviour:
   accuracy: 100
   pp: 15
   attackType: 1
+  recoil: 1
+  denominator: 3

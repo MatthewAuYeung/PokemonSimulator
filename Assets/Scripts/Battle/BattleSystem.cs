@@ -25,6 +25,8 @@ public class BattleSystem : MonoBehaviour
     private BattleState battleState;
     private int currentActionIndex;
     private int currentMoveIndex;
+    private bool isPlayerfirst;
+    private int randomint;
 
     private void Start()
     {
@@ -50,6 +52,30 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"??? sents out {enemy.enemyUnit.Pokemon.Base.Name}.");
         PlayerAction();
+    }
+
+    private void CompareSpeed()
+    {
+        if(playerUnit.Pokemon.Speed > enemy.enemyUnit.Pokemon.Speed)
+        {
+            isPlayerfirst = true;
+        }
+        else if(playerUnit.Pokemon.Speed == enemy.enemyUnit.Pokemon.Speed)
+        {
+            randomint = UnityEngine.Random.Range(0, 100);
+            if(randomint > 50)
+            {
+                isPlayerfirst = true;
+            }
+            else
+            {
+                isPlayerfirst = false;
+            }
+        }
+        else
+        {
+            isPlayerfirst = false;
+        }
     }
 
     private void PlayerAction()
@@ -82,7 +108,7 @@ public class BattleSystem : MonoBehaviour
         var dmgInfo = enemy.enemyUnit.Pokemon.TakeDamage(move, playerUnit.Pokemon);
         yield return enemyHud.UpdateHp();
 
-                yield return ShowDamageInfo(dmgInfo);
+        yield return ShowDamageInfo(dmgInfo, playerUnit.Pokemon, playerHud);
 
         if (dmgInfo.Faint)
         {
@@ -96,7 +122,14 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            StartCoroutine(PerformEnemyMove());
+            if(isPlayerfirst)
+            {
+                StartCoroutine(PerformEnemyMove());
+            }
+            else
+            {
+                PlayerAction();
+            }
         }
     }
 
@@ -116,7 +149,7 @@ public class BattleSystem : MonoBehaviour
         var dmgInfo = playerUnit.Pokemon.TakeDamage(move, enemy.enemyUnit.Pokemon);
         yield return playerHud.UpdateHp();
 
-        yield return ShowDamageInfo(dmgInfo);
+        yield return ShowDamageInfo(dmgInfo, enemy.enemyUnit.Pokemon, enemyHud);
 
         if (dmgInfo.Faint)
         {
@@ -130,11 +163,18 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            PlayerAction();
+            if(isPlayerfirst)
+            {
+                PlayerAction();
+            }
+            else
+            {
+                StartCoroutine(PerformPlayerMove());
+            }
         }
     }
 
-    private IEnumerator ShowDamageInfo(Pokemon.DamageInfo info)
+    private IEnumerator ShowDamageInfo(Pokemon.DamageInfo info, Pokemon attacker, BattleHud hud)
     {
         if (info.TypeEffectiveness > 1.0f)
             yield return dialogBox.TypeDialog("It's super effective!");
@@ -143,6 +183,13 @@ public class BattleSystem : MonoBehaviour
 
         if (info.Critical > 1.0f)
             yield return dialogBox.TypeDialog("A critical hit!");
+
+        if(info.RecoilDmg > 0.0f)
+        {
+            attacker.hp -= info.RecoilDmg;
+            yield return hud.UpdateHp();
+            yield return dialogBox.TypeDialog($"{attacker.Base.Name} is damaged by recoil!");
+        }
     }
 
     private void Update()
@@ -243,7 +290,15 @@ public class BattleSystem : MonoBehaviour
 
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
-            StartCoroutine(PerformPlayerMove());
+            CompareSpeed();
+            if(isPlayerfirst)
+            {
+                StartCoroutine(PerformPlayerMove());
+            }
+            else
+            {
+                StartCoroutine(PerformEnemyMove());
+            }
         }
     }
 }
